@@ -78,3 +78,6 @@ my.scatter <- qplot(x=extrav,y=popular,data=analytic.data.groups.15.to.30)
 my.scatter <- my.scatter + geom_smooth(method = "lm", se = TRUE, color="black")
 my.scatter <- my.scatter + facet_wrap(~class)
 print(my.scatter)
+
+# Save
+ggsave("groupScatterPlotWithCI.pdf",plot=my.scatter,width=6,height=6)
