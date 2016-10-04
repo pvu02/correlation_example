@@ -63,3 +63,18 @@ cor.test(x=analytic.data.class.is.5$extrav,y=analytic.data.class.is.5$popular)
 analytic.data.grouped.by.class <- group_by(analytic.data, class)
 cor.by.group <- summarise(analytic.data.grouped.by.class, cor.test(x=extrav,y=popular)$estimate)
 print(cor.by.group)
+
+# Print all rows
+print(as.data.frame(cor.by.group))
+
+# Plotting correlations for several groups
+analytic.data.groups.15.to.30 <- filter(analytic.data.grouped.by.class, class>=15 & class<=30)
+my.scatter <- qplot(x=extrav,y=popular,data=analytic.data.groups.15.to.30)
+my.scatter <- my.scatter + facet_wrap(~class)
+print(my.scatter)
+
+# Add regression line to groups
+my.scatter <- qplot(x=extrav,y=popular,data=analytic.data.groups.15.to.30)
+my.scatter <- my.scatter + geom_smooth(method = "lm", se = TRUE, color="black")
+my.scatter <- my.scatter + facet_wrap(~class)
+print(my.scatter)
